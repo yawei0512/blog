@@ -1,0 +1,28 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<span class="header-search">
+  <Icon name="search" />
+  <div class="input"></div>
+</span>
+
+<style>
+  .header-search {
+    height: 50%;
+    width: 200px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header-search .input {
+  }
+
+  [data-icon="search"] {
+    font-size: 20px;
+    margin-left: 5px;
+    color: #434343;
+  }
+</style>

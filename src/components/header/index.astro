@@ -1,0 +1,40 @@
+---
+import BlogTitle from "./BlogTitle.astro";
+import HeaderSearch from "./HeaderSearch.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+const { height = "50px", background = "#ffffff" } = Astro.props;
+---
+
+<header class="blog-header">
+  <span class="blog-title"><BlogTitle /></span>
+  <span class="header-tools">
+    <ThemeIcon />
+    <HeaderSearch />
+  </span>
+</header>
+
+<style define:vars={{ height, background }}>
+  .blog-header {
+    height: var(--height);
+    background-color: var(--background);
+    display: flex;
+    flex-direction: row;
+  }
+
+  .blog-title {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+  }
+
+  .header-tools {
+    width: 100%;
+    height: 100%;
+    padding-right: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<span id="change-theme-btn">
+    <Icon name="light-theme" />
+    <Icon name="dark-theme" />
+</span>
+
+<style>
+    [data-icon="light-theme"] {
+        display: none;
+    }
+
+    [data-icon="dark-theme"] {
+        color: #3c3c3c;
+        font-size: 20px;
+    }
+
+    :global(.dark) [data-icon="light-theme"] {
+        color: #c2c2c2;
+        font-size: 20px;
+        display: block;
+    }
+
+    :global(.dark) [data-icon="dark-theme"] {
+        display: none;
+    }
+
+    #change-theme-btn:hover {
+        cursor: pointer;
+    }
+</style>
+
+<script is:inline>
+  const changeTheme = () => {
+    const element = document.documentElement;
+    element.classList.toggle("dark");
+  };
+
+  document
+    .getElementById("change-theme-btn")
+    .addEventListener("click", changeTheme);
+</script>
