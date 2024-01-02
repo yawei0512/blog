@@ -4,12 +4,10 @@ import { getLangFromUrl } from "../../i18n/utils";
 
 const { options = {} } = Astro.props;
 const url = Astro.url;
-const origin = url.origin;
-
 const currentLang = getLangFromUrl(url);
 ---
 <select id="dropdown" class="dropdown">
-  {options.map((item) => <option selected={currentLang === item.value ? true: false} value={item.value === DEFAULT_LANGUAGE ? origin:`${origin}/${item.value}`}>{item.label}</option>)}
+  {options.map((item) => <option selected={currentLang === item.value ? true: false} value={item.value === DEFAULT_LANGUAGE ? '/':`${item.value}`}>{item.label}</option>)}
 </select>
 
 <style>
@@ -26,15 +24,13 @@ const currentLang = getLangFromUrl(url);
 .dropdown:focus-visible {
   outline: none;
 }
-
-
 </style>
 
 <script>
   const dropDownSelect = document.querySelector('#dropdown') as HTMLSelectElement;
   dropDownSelect.addEventListener("change", () => {
     const selectedIndex = dropDownSelect.selectedIndex;
-    console.log(selectedIndex)
+    console.log(selectedIndex);
     if (dropDownSelect.options[selectedIndex].value) {
       const url = dropDownSelect.options[selectedIndex].value;
       window.location = url as string & Location;
