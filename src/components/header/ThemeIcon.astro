@@ -3,42 +3,71 @@ import { Icon } from "astro-icon/components";
 ---
 
 <span id="change-theme-btn">
-    <Icon name="light-theme" />
-    <Icon name="dark-theme" />
+  <Icon name="light-theme" />
+  <Icon name="dark-theme" />
 </span>
 
 <style>
-    [data-icon="light-theme"] {
-        display: none;
-    }
+  [data-icon="light-theme"] {
+    display: none;
+  }
 
-    [data-icon="dark-theme"] {
-        color: #3c3c3c;
-        font-size: 22px;
-    }
+  [data-icon="dark-theme"] {
+    color: #3c3c3c;
+    font-size: 22px;
+  }
 
-    :global(.dark) [data-icon="light-theme"] {
-        color: #c2c2c2;
-        font-size: 22px;
-        display: block;
-    }
+  :global(.dark) [data-icon="light-theme"] {
+    color: #f5f5f5;
+    font-size: 22px;
+    display: block;
+  }
 
-    :global(.dark) [data-icon="dark-theme"] {
-        display: none;
-    }
+  :global(.dark) [data-icon="dark-theme"] {
+    display: none;
+  }
 
-    #change-theme-btn:hover {
-        cursor: pointer;
-    }
+  #change-theme-btn:hover {
+    cursor: pointer;
+  }
 </style>
 
 <script is:inline>
+  /** 改变主题 light/dark start */
+  // 获取localStorage存储的当前主题或浏览器主题偏好
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+
+    if (window.matchMedia("(prefers-color-scheme: dark)")) {
+      return "dark";
+    }
+
+    return "light";
+  })();
+
+  // 设置主题
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.documentElement.classList.add("dark");
+  }
+
+  // 保存
+  window.localStorage.setItem("theme", theme);
+
+  // 按钮监听事件
   const changeTheme = () => {
     const element = document.documentElement;
     element.classList.toggle("dark");
+
+    const isDark = element.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
   };
 
   document
     .getElementById("change-theme-btn")
     .addEventListener("click", changeTheme);
+  /** 改变主题 light/dark end */
 </script>
