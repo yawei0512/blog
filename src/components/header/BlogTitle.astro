@@ -1,16 +1,25 @@
 ---
-
+import {getLangFromUrl, useTranslations} from "../../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
+
 <a href="/">
-    <h2>个人博客</h2>
+  <h2>{t('header.title')}</h2>
 </a>
 
 <style>
-    a {
-        color: #262626;
-    }
+  a {
+    color: #262626;
+  }
 
-    a:hover {
-        color: #434343;
+  a:hover {
+    color: #434343;
+  }
+
+  @media screen and (max-width: 636px) {
+    h2 {
+      font-size: 15px;
     }
+  }
 </style>

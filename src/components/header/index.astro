@@ -2,14 +2,16 @@
 import BlogTitle from "./BlogTitle.astro";
 import HeaderSearch from "./HeaderSearch.astro";
 import ThemeIcon from "./ThemeIcon.astro";
+import LanguageOptions from "./LanguageSelect.astro";
 const { height = "50px", background = "#ffffff" } = Astro.props;
 ---
 
-<header class="blog-header">
+<header class="blog-header" onselectstart="return false">
   <span class="blog-title"><BlogTitle /></span>
   <span class="header-tools">
-    <ThemeIcon />
-    <HeaderSearch />
+    <div style="margin-left: 10px;"><ThemeIcon /></div>
+    <div style="margin-left: 10px;"><LanguageOptions /></div>
+    <div><HeaderSearch /></div>
   </span>
 </header>
 
@@ -19,6 +21,7 @@ const { height = "50px", background = "#ffffff" } = Astro.props;
     background-color: var(--background);
     display: flex;
     flex-direction: row;
+    z-index: 200;
   }
 
   .blog-title {
@@ -34,7 +37,22 @@ const { height = "50px", background = "#ffffff" } = Astro.props;
     height: 100%;
     padding-right: 80px;
     display: flex;
-    align-items: center;
     flex-direction: row-reverse;
+  }
+
+  .header-tools div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 636px) {
+    .blog-title {
+      padding-left: 20px;
+    }
+
+    .header-tools {
+      padding-right: 20px;
+    }
   }
 </style>

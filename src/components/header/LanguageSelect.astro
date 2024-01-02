@@ -1,0 +1,18 @@
+---
+import Dropdown from "../common/Dropdown.astro";
+import { LANGUAGES } from "../../i18n/ui";
+const values = Object.keys(LANGUAGES);
+const options = []
+values.map(value => {
+    options.push({value: value, label: LANGUAGES[value]})
+});
+---
+<div class="language-select">
+    <Dropdown options={options} />
+</div>
+
+<style>
+    .language-select {
+        height: 50%;
+    }
+</style>
