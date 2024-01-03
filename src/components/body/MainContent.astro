@@ -19,11 +19,7 @@ const allPosts = await getCollection(
     {
       allPosts.map((post) => (
         <BlogCard
-          url={`${
-            post.slug.includes("/")
-              ? post.slug.slice(post.slug.lastIndexOf("/") + 1)
-              : post.slug
-          }`}
+          url={`${post.slug.includes("/") ? post.slug.slice(post.slug.lastIndexOf("/") + 1) : post.slug}`}
           title={post.data.title}
         />
       ))
