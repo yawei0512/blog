@@ -1,6 +1,56 @@
 ---
-const {title, url} = Astro.props;
+const {title, url, description} = Astro.props;
 ---
 <li class="blog-card">
-    <a href={url}>{title}</a>
+    <a href={url} class="link">
+        <div class="title">{title}</div>
+        <div class="description">{description}</div>
+    </a>
 </li>
+
+<style>
+    .blog-card {
+        list-style-type: none;
+        height: 120px;
+        border: 1px solid #f0f0f0;
+    }
+
+    :global(.dark) .blog-card {
+        border: 1px solid #616161;
+    }
+
+    .blog-card .link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        color: #000000;
+    }
+
+    .blog-card .link:hover {
+        color: #263238;
+        box-shadow: 2px 2px 5px #EEEEEE;
+    }
+
+    :global(.dark) .blog-card .link:hover {
+        box-shadow: 2px 2px 5px #616161;
+    }
+
+    .blog-card .link .title {
+        height: 35%;
+        padding-left: 15px;
+        padding-top: 10px;
+        font-size: 18px;
+    }
+
+    .blog-card .link .description {
+        padding-left: 15px;
+        font-size: 14px;
+        color: #616161;
+        height: 66%;
+    }
+
+    :global(.dark) .blog-card .link .description {
+        color: #9E9E9E;
+    }
+</style>

@@ -14,14 +14,20 @@ const allPosts = await getCollection(
 ---
 
 <!-- 部署到服务器时，应删掉 ${post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language}/ -->
-
 <div class="main-content">
   <ul>
     {
       allPosts.map((post) => (
         <BlogCard
-          url={`${post.collection}/${post.slug.includes("/") ? post.slug.slice(post.slug.lastIndexOf("/") + 1) : post.slug }`}
+          url={`${
+            post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language
+          }/${post.collection}/${
+            post.slug.includes("/")
+              ? post.slug.slice(post.slug.lastIndexOf("/") + 1)
+              : post.slug
+          }`}
           title={post.data.title}
+          description={post.data.description}
         />
       ))
     }

@@ -10,11 +10,11 @@ a {
 /* Dark Theme */
 
 html.dark {
-    background-color: #434343;
+    background-color: #17181c;
 }
 
 .dark .blog-header {
-    background-color: #3c3c3c !important;
+    background-color: #23262f !important;
 }
 
 .dark a {
@@ -22,14 +22,40 @@ html.dark {
 }
 
 .dark .header-search {
-    background-color: #434343 !important;
+    background-color: #444851 !important;
 }
 
 .dark [data-icon="search"] {
-    color: #c2c2c2 !important;
+    color: #f5f5f5 !important;
 }
 
 .dark .dropdown {
-    background-color: #3c3c3c !important;
+    background-color: #23262f !important;
     color: #f5f5f5;
+}
+
+/* Markdown样式 */
+.blog-layout .content h1 {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.blog-layout .content h2 {
+    margin: 10px 0;
+}
+
+.blog-layout .content p {
+    margin: 10px 0;
+}
+
+.blog-layout .content ul, .blog-layout .content ol {
+    margin-left: 35px;
+}
+
+.dark .blog-layout .content h1, .dark .blog-layout .content h2, .dark .blog-layout .content ul, .dark .blog-layout .content ol {
+    color: #E0E0E0;
+}
+
+.dark .blog-layout .content p {
+    color: #BDBDBD;
 }

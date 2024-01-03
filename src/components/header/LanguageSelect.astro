@@ -1,18 +1,80 @@
 ---
-import Dropdown from "../common/Dropdown.astro";
 import { LANGUAGES } from "../../i18n/ui";
-const values = Object.keys(LANGUAGES);
-const options = []
-values.map(value => {
-    options.push({value: value, label: LANGUAGES[value]})
+import { DEFAULT_LANGUAGE } from "../../i18n/ui";
+import { getLangFromUrl } from "../../i18n/utils";
+
+const url = Astro.url;
+const currentLang = getLangFromUrl(url);
+const pathname = url.pathname;
+
+const languageKeys = Object.keys(LANGUAGES);
+const languageArray: any = [];
+languageKeys.map((value) => {
+  languageArray.push({ value: value, label: LANGUAGES[value] });
 });
 ---
+
 <div class="language-select">
-    <Dropdown options={options} />
+  <select id="dropdown" class="dropdown">
+    {
+      languageArray.map((item) => (
+        <option
+          selected={currentLang === item.value ? true : false}
+          data-pathname={pathname}
+          value={item.value === DEFAULT_LANGUAGE ? "/" : `${item.value}`}
+        >
+          {item.label}
+        </option>
+      ))
+    }
+  </select>
 </div>
 
 <style>
-    .language-select {
-        height: 50%;
-    }
+  .language-select {
+    height: 50%;
+  }
+
+  .dropdown {
+    height: 100%;
+    border: none;
+    background-color: #f5f5f5;
+  }
+
+  .dropdown:hover {
+    cursor: pointer;
+  }
+
+  .dropdown:focus-visible {
+    outline: none;
+  }
 </style>
+
+<script>
+  const dropDownSelect = document.querySelector(
+    "#dropdown",
+  ) as HTMLSelectElement;
+
+  dropDownSelect.addEventListener("change", () => {
+    const selectedIndex = dropDownSelect.selectedIndex;
+    // 当前路径
+    const pathname = dropDownSelect.options[selectedIndex].getAttribute("data-pathname");
+    // selectedIndex表示选中的值
+    // 如果当前路径长度 > 3，且包含 "en"，那么将其变为中文，即删掉pathname中的 "/en"
+    if (pathname && pathname.length > 3 && pathname.includes("en")) {
+      window.location = `${pathname.slice(3)}` as string & Location;
+      return;
+    }
+
+    // 如果当前路径长度 > 3，且不包含 "en"，那么将其变为英文，即在pathname前添加 "/en"
+    if (pathname && pathname.length > 3 && !pathname.includes("en")) {
+      window.location = `/${dropDownSelect.options[selectedIndex].value}${pathname}` as string & Location;
+      return;
+    }
+
+    if (dropDownSelect.options[selectedIndex].value) {
+      const url = dropDownSelect.options[selectedIndex].value;
+      window.location = url as string & Location;
+    }
+  });
+</script>
