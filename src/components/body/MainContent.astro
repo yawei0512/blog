@@ -19,9 +19,7 @@ const allPosts = await getCollection(
     {
       allPosts.map((post) => (
         <BlogCard
-          url={`${
-            post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language
-          }/${post.collection}/${
+          url={`${post.collection}/${
             post.slug.includes("/")
               ? post.slug.slice(post.slug.lastIndexOf("/") + 1)
               : post.slug
