@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import BlogHeader from "../components/header/index.astro";
+import BlogContent from "../components/body/index.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <BlogHeader height="60px" background="#f5f5f5" />
+    <slot>
+      <div class="blog-layout">
+        <slot>
+            <div class="blog-content">
+                <BlogContent />
+              </div>
+        </slot>
+    </div>
+    </slot>
+  </body>
+</html>
+
+<style>
+    .blog-layout {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .blog-content {
+      height: calc(100vh - 60px);
+    }
+  </style>

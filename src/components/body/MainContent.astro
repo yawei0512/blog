@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "./BlogCard.astro";
+import { getLangFromUrl } from "../../i18n/utils";
+import { DEFAULT_LANGUAGE } from "../../i18n/ui";
+
+const url = Astro.url;
+const currentLang = getLangFromUrl(url);
+
+const allPosts = await getCollection(
+  "posts",
+  ({ data }) => data.language === currentLang,
+);
+console.log(allPosts);
+---
+
+<div class="main-content">
+  <ul>
+    {
+      allPosts.map((post) => (
+        <BlogCard
+          url={`${
+            post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language
+          }/${post.collection}/${
+            post.slug.includes("/")
+              ? post.slug.slice(post.slug.lastIndexOf("/") + 1)
+              : post.slug
+          }`}
+          title={post.data.title}
+        />
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .main-content {
+    width: 60%;
+  }
+</style>

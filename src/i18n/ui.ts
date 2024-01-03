@@ -1,12 +1,12 @@
 export const LANGUAGES = {
-    zhCn: '简体中文',
+    zhcn: '简体中文',
     en: 'English',
 }
 
-export const DEFAULT_LANGUAGE="zhCn";
+export const DEFAULT_LANGUAGE="zhcn";
 
 export const UI = {
-    zhCn: {
+    zhcn: {
         'header.title': '个人博客'
     },
     en: {

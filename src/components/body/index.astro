@@ -1,0 +1,17 @@
+---
+import LeftContent from "./LeftContent.astro";
+import MainContent from "./MainContent.astro";
+import RightContent from "./RightContent.astro";
+---
+<div class="blog-content">
+    <LeftContent />
+    <MainContent />
+    <RightContent />
+</div>
+
+<style>
+    .blog-content {
+        display: flex;
+        height: 100%;
+    }
+</style>
