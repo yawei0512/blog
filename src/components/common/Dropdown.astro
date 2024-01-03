@@ -30,7 +30,6 @@ const currentLang = getLangFromUrl(url);
   const dropDownSelect = document.querySelector('#dropdown') as HTMLSelectElement;
   dropDownSelect.addEventListener("change", () => {
     const selectedIndex = dropDownSelect.selectedIndex;
-    console.log(selectedIndex);
     if (dropDownSelect.options[selectedIndex].value) {
       const url = dropDownSelect.options[selectedIndex].value;
       window.location = url as string & Location;

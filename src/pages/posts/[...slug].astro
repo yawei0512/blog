@@ -11,8 +11,6 @@ export async function getStaticPaths() {
         return { params: {slug: post.slug}, props: post }
   });
 
-  console.log("paths", paths);
-
   return paths;
 }
 

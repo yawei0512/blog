@@ -11,17 +11,15 @@ const allPosts = await getCollection(
   "posts",
   ({ data }) => data.language === currentLang,
 );
-console.log(allPosts);
 ---
 
+<!-- 部署到服务器时，应删掉 ${post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language}/ -->
 <div class="main-content">
   <ul>
     {
       allPosts.map((post) => (
         <BlogCard
           url={`${
-            post.data.language === DEFAULT_LANGUAGE ? "" : post.data.language
-          }/${post.collection}/${
             post.slug.includes("/")
               ? post.slug.slice(post.slug.lastIndexOf("/") + 1)
               : post.slug
